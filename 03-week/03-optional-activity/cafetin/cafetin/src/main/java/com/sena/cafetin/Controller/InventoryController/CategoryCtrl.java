@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
+import com.sena.cafetin.Dto.InventoryDto.CategoryDto;
 import com.sena.cafetin.Entity.Inventory.Category;
 import com.sena.cafetin.Service.InventoryService.CategorySvc;
 
@@ -15,12 +16,18 @@ public class CategoryCtrl {
     private CategorySvc service;
 
     @GetMapping
-    public List<Category> list() {
-        return service.findAll();
+    public List<CategoryDto> list() {
+        return service.findAllDto();
     }
 
     @PostMapping
-    public Category save(@RequestBody Category category) {
-        return service.save(category);
+    public CategoryDto save(@RequestBody CategoryDto dto) {
+        // Convertimos DTO → Entity
+        Category category = new Category(dto.getId(), dto.getName(), dto.getDescription());
+        Category saved = service.save(category);
+
+        // Devolvemos DTO
+        return new CategoryDto(saved.getId(), saved.getName(), saved.getDescription());
     }
+
 }

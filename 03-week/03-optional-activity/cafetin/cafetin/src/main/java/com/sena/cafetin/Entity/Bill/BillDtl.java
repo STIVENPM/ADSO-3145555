@@ -4,7 +4,7 @@ import com.sena.cafetin.Entity.Inventory.Product;
 
 import jakarta.persistence.*;
 @Entity(name = "bill_detail")
-public class Bill_Detail {
+public class BillDtl {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,12 +23,15 @@ public class Bill_Detail {
     @JoinColumn(name = "Bill_id")
     private Bill bill;
 
-    public Bill_Detail() {
+    public Bill getBill() 
+    { return bill; }
+    
+    public BillDtl() {
     }
 
 
 
-    public Bill_Detail(Integer id, Integer quantity, Double price) {
+    public BillDtl(Integer id, Integer quantity, Double price) {
         this.id = id;
         this.quantity = quantity;
         this.price = price;
@@ -57,5 +60,10 @@ public class Bill_Detail {
     public void setPrice(Double price) {
         this.price = price;
     }
+
+
+
+
+   
 
 }

@@ -1,7 +1,7 @@
 package com.sena.cafetin.Entity.Segurity;
 import jakarta.persistence.*;
 @Entity(name = "users")
-public class Users {
+public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -14,10 +14,10 @@ public class Users {
     @JoinColumn(name="person_id", unique=true)
     private Person person;
     
-    public Users() {
+    public User() {
     }
 
-    public Users(Integer id, String username, String password) {
+    public User(Integer id, String username, String password) {
         this.id = id;
         this.username = username;
         this.password = password;

@@ -6,29 +6,29 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.sena.cafetin.Entity.Bill.Bill;
-import com.sena.cafetin.IService.BillIService.BillISvc;
+import com.sena.cafetin.Entity.Bill.BillDtl;
+import com.sena.cafetin.Service.BillService.BillDtlSvc;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestBody;
 
 
 @RestController
-@RequestMapping("/bill")
-public class BillCtrl {
-
+@RequestMapping("/bill-dtl")
+public class BillDtlCtrl {
     @Autowired
-    private BillISvc service;
+    private BillDtlSvc billDtlSvc;
 
     @GetMapping
-    public List<Bill> list() {
-    return service.findAll();
+    public List<BillDtl> list() {
+        return billDtlSvc.findAll();
     }
 
     @PostMapping
-    public Bill save(@RequestParam Bill bill) {
-        return service.save(bill);
+    public BillDtl save(@RequestBody BillDtl billDtl) {
+        return billDtlSvc.save(billDtl);
     }
     
+
 }

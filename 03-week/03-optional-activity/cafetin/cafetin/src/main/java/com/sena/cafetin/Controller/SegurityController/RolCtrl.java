@@ -1,13 +1,12 @@
-package com.sena.cafetin.Controller.BillController;
+package com.sena.cafetin.Controller.SegurityController;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.sena.cafetin.Entity.Bill.Bill;
-import com.sena.cafetin.IService.BillIService.BillISvc;
+import com.sena.cafetin.Entity.Segurity.Rol;
+import com.sena.cafetin.IService.SegurityIService.RolISvc;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,20 +14,20 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 
 @RestController
-@RequestMapping("/bill")
-public class BillCtrl {
-
+@RequestMapping("/api/rol")
+public class RolCtrl {
     @Autowired
-    private BillISvc service;
+    private RolISvc rolService;
 
     @GetMapping
-    public List<Bill> list() {
-    return service.findAll();
+    public List<Rol> FindAll() {
+        return rolService.FindAll();
     }
 
     @PostMapping
-    public Bill save(@RequestParam Bill bill) {
-        return service.save(bill);
+    public Rol save(@RequestParam String name) {
+        Rol rol = new Rol();
+        rol.setName(name);
+        return rolService.save(rol);
     }
-    
 }
