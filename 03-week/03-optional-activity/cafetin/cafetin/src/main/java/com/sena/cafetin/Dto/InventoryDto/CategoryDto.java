@@ -1,11 +1,14 @@
 package com.sena.cafetin.Dto.InventoryDto;
 
+
 public class CategoryDto {
+
     private Integer id;
     private String name;
     private String description;
 
-    public CategoryDto() {}
+    public CategoryDto() {
+    }
 
     public CategoryDto(Integer id, String name, String description) {
         this.id = id;
@@ -37,6 +40,4 @@ public class CategoryDto {
         this.description = description;
     }
 }
-
-
 

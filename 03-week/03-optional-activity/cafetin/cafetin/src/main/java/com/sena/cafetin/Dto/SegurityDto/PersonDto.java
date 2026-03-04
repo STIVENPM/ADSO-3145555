@@ -1,25 +1,19 @@
-package com.sena.cafetin.Entity.Segurity;
+package com.sena.cafetin.Dto.SegurityDto;
 
-import jakarta.persistence.*;
+public class PersonDto {
 
-@Entity(name = "person")    
-public class Person {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-
     private String name;
     private Integer age;
 
-    public Person() {
+    public PersonDto() {
     }
 
-    public Person(Integer id, String name, Integer age) {
+    public PersonDto(Integer id, String name, Integer age) {
         this.id = id;
         this.name = name;
         this.age = age;
-    }   
+    }
 
     public Integer getId() {
         return id;
@@ -44,7 +38,4 @@ public class Person {
     public void setAge(Integer age) {
         this.age = age;
     }
-
-    
-        
-    }
+}

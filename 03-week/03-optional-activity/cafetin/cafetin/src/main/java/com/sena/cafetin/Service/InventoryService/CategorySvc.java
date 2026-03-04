@@ -1,8 +1,7 @@
 package com.sena.cafetin.Service.InventoryService;
 
-import java.util.ArrayList;
 import java.util.List;
-
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,26 +15,67 @@ import com.sena.cafetin.Repository.InventoryRepository.CategoryRepo;
 public class CategorySvc implements CategoryISvc {
 
     @Autowired
-    private CategoryRepo repository;
+    private CategoryRepo categoryRepo;
 
     @Override
-    public List<Category> findAll() {
-        return repository.findAll();
+    public List<CategoryDto> findAll() {
+        return categoryRepo.findAll()
+                .stream()
+                .map(this::convertToDto)
+                .collect(Collectors.toList());
     }
 
     @Override
-    public Category save(Category category) {
-        return repository.save(category);
-    }
-public List<CategoryDto> findAllDto() {
-    List<Category> entities = repository.findAll();
-    List<CategoryDto> dtos = new ArrayList<>();
-
-    for (Category cat : entities) {
-        dtos.add(new CategoryDto(cat.getId(), cat.getName(), cat.getDescription()));
+    public CategoryDto findById(Integer id) {
+        Category category = categoryRepo.findById(id)
+                .orElseThrow(() -> new RuntimeException("Categoria no encontrada"));
+        return convertToDto(category);
     }
 
-    return dtos;
-}
+    @Override
+    public CategoryDto save(CategoryDto categoryDto) {
+        Category category = convertToEntity(categoryDto);
+        Category saved = categoryRepo.save(category);
+        return convertToDto(saved);
+    }
 
+    @Override
+    public CategoryDto update(CategoryDto categoryDto, Integer id) {
+        Category existing = categoryRepo.findById(id)
+                .orElseThrow(() -> new RuntimeException("Categoria no encontrada"));
+
+        existing.setName(categoryDto.getName());
+        existing.setDescription(categoryDto.getDescription());
+
+        Category updated = categoryRepo.save(existing);
+        return convertToDto(updated);
+    }
+
+    @Override
+    public void delete(Integer id) {
+        if (!categoryRepo.existsById(id)) {
+            throw new RuntimeException("Categoria no encontrada");
+        }
+        categoryRepo.deleteById(id);
+    }
+
+    // ==========================
+    // CONVERSIONES
+    // ==========================
+
+    private CategoryDto convertToDto(Category category) {
+        return new CategoryDto(
+                category.getId(),
+                category.getName(),
+                category.getDescription()
+        );
+    }
+
+    private Category convertToEntity(CategoryDto dto) {
+        Category category = new Category();
+        category.setId(dto.getId());
+        category.setName(dto.getName());
+        category.setDescription(dto.getDescription());
+        return category;
+    }
 }

@@ -3,15 +3,20 @@ package com.sena.cafetin.Controller.SegurityController;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.sena.cafetin.Entity.Segurity.Person;
+import com.sena.cafetin.Dto.SegurityDto.PersonDto;
+
 import com.sena.cafetin.IService.SegurityIService.PersonISvc;
 
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 
 @RestController
@@ -19,17 +24,36 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class PersonCtrl {
 
     @Autowired
-    private PersonISvc personService;
+    private PersonISvc personSvc;
 
+    // GET: traer todos
     @GetMapping
-    public List<Person> FindAll() {
-        return personService.FindAll();
+    public ResponseEntity<List<PersonDto>> findAll() {
+        return ResponseEntity.ok(personSvc.FindAll());
     }
 
+    // GET: traer por id
+    @GetMapping("/{id}")
+    public ResponseEntity<PersonDto> findById(@PathVariable Integer id) {
+        return ResponseEntity.ok(personSvc.FindById(id));
+    }
+
+    // POST: guardar
     @PostMapping
-    public Person save(@RequestParam String name) {
-        Person person = new Person();
-        person.setName(name);
-        return personService.save(person);
+    public ResponseEntity<PersonDto> save(@RequestBody PersonDto personDto) {
+        return ResponseEntity.ok(personSvc.save(personDto));
+    }
+
+    // PUT: actualizar
+    @PutMapping("/{id}")
+    public ResponseEntity<PersonDto> update(@RequestBody PersonDto personDto, @PathVariable Integer id) {
+        return ResponseEntity.ok(personSvc.update(personDto, id));
+    }
+
+    // DELETE: eliminar
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Integer id) {
+        personSvc.delete(id);
+        return ResponseEntity.noContent().build();
     }
 }

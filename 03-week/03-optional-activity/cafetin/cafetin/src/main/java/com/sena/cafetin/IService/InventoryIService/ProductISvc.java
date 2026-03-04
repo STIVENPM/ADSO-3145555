@@ -1,9 +1,12 @@
 package com.sena.cafetin.IService.InventoryIService;
 
-import com.sena.cafetin.Entity.Inventory.Product;
 import java.util.List;
+import com.sena.cafetin.Dto.InventoryDto.ProductDto;
 
 public interface ProductISvc {
-    List<Product> findAll();
-    Product save(Product product);
+    List<ProductDto> findAll();
+    ProductDto save(ProductDto productDto);
+    ProductDto update(ProductDto productDto, Integer id);
+    void delete(Integer id);
+    ProductDto findById(Integer id);
 }

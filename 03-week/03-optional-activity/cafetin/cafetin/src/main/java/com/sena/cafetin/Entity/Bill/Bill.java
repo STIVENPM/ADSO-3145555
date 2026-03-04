@@ -2,6 +2,7 @@ package com.sena.cafetin.Entity.Bill;
 
 import java.time.LocalDate;
 
+
 import jakarta.persistence.*;
 
 @Entity(name = "bill")
@@ -45,6 +46,8 @@ public class Bill {
     public void setTotal(Double total) {
         this.total = total;
     }
+
+   
 
 
     
