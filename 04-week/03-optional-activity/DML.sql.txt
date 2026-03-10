@@ -1,0 +1,690 @@
+INSERT INTO type_document (name) VALUES
+('CC'),
+('TI'),
+('CC'),
+('TI'),
+('CC'),
+('TI'),
+('CC'),
+('TI'),
+('CC'),
+('TI');
+
+INSERT INTO person (type_document_id, document_number, name, email)
+VALUES
+((SELECT id_type_document FROM type_document WHERE name='CC' LIMIT 1), '101000010', 'Camila Ortiz', 'camila@gmail.com');
+
+INSERT INTO person (type_document_id, document_number, name, email)
+VALUES
+((SELECT id_type_document FROM type_document WHERE name='CC' LIMIT 1),'101000001','Juan Perez','juan@gmail.com');
+
+INSERT INTO person (type_document_id, document_number, name, email)
+VALUES
+((SELECT id_type_document FROM type_document WHERE name='CC' LIMIT 1), '101000002', 'Maria Gomez', 'maria@gmail.com');
+
+INSERT INTO person (type_document_id, document_number, name, email)
+VALUES
+((SELECT id_type_document FROM type_document WHERE name='TI' LIMIT 1), '101000003', 'Carlos Lopez', 'carlos@gmail.com');
+
+INSERT INTO person (type_document_id, document_number, name, email)
+VALUES
+((SELECT id_type_document FROM type_document WHERE name='TI' LIMIT 1), '101000004', 'Laura Martinez', 'laura@gmail.com');
+
+INSERT INTO person (type_document_id, document_number, name, email)
+VALUES
+((SELECT id_type_document FROM type_document WHERE name='CC' LIMIT 1), '101000005', 'Andres Torres', 'andres@gmail.com');
+
+INSERT INTO person (type_document_id, document_number, name, email)
+VALUES
+((SELECT id_type_document FROM type_document WHERE name='TI' LIMIT 1), '101000006', 'Sofia Ramirez', 'sofia@gmail.com');
+
+INSERT INTO person (type_document_id, document_number, name, email)
+VALUES
+((SELECT id_type_document FROM type_document WHERE name='CC' LIMIT 1), '101000007', 'Daniel Vargas', 'daniel@gmail.com');
+
+INSERT INTO person (type_document_id, document_number, name, email)
+VALUES
+((SELECT id_type_document FROM type_document WHERE name='TI' LIMIT 1), '101000008', 'Valentina Rojas', 'valentina@gmail.com');
+
+INSERT INTO person (type_document_id, document_number, name, email)
+VALUES
+((SELECT id_type_document FROM type_document WHERE name='TI' LIMIT 1), '101000009', 'Miguel Herrera', 'miguel@gmail.com');
+
+
+
+INSERT INTO file (file_name, file_type, person_id)
+VALUES
+('juan_perez_cc.pdf', 'application/pdf',
+ (SELECT id FROM person WHERE document_number = '101000001' LIMIT 1));
+
+INSERT INTO file (file_name, file_type, person_id)
+VALUES
+('maria_gomez_docx.docx', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+ (SELECT id FROM person WHERE document_number = '101000002' LIMIT 1));
+
+INSERT INTO file (file_name, file_type, person_id)
+VALUES
+('carlos_lopez_foto.jpg', 'image/jpeg',
+ (SELECT id FROM person WHERE document_number = '101000003' LIMIT 1));
+
+INSERT INTO file (file_name, file_type, person_id)
+VALUES
+('laura_martinez_png.png', 'image/png',
+ (SELECT id FROM person WHERE document_number = '101000004' LIMIT 1));
+
+INSERT INTO file (file_name, file_type, person_id)
+VALUES
+('andres_torres_cv.pdf', 'application/pdf',
+ (SELECT id FROM person WHERE document_number = '101000005' LIMIT 1));
+
+INSERT INTO file (file_name, file_type, person_id)
+VALUES
+('sofia_ramirez_info.txt', 'text/plain',
+ (SELECT id FROM person WHERE document_number = '101000006' LIMIT 1));
+
+INSERT INTO file (file_name, file_type, person_id)
+VALUES
+('daniel_vargas_excel.xlsx', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+ (SELECT id FROM person WHERE document_number = '101000007' LIMIT 1));
+
+INSERT INTO file (file_name, file_type, person_id)
+VALUES
+('valentina_rojas_presentacion.pptx', 'application/vnd.openxmlformats-officedocument.presentationml.presentation',
+ (SELECT id FROM person WHERE document_number = '101000008' LIMIT 1));
+
+INSERT INTO file (file_name, file_type, person_id)
+VALUES
+('miguel_herrera_archivo.pdf', 'application/pdf',
+ (SELECT id FROM person WHERE document_number = '101000009' LIMIT 1));
+
+INSERT INTO file (file_name, file_type, person_id)
+VALUES
+('camila_ortiz_perfil.jpg', 'image/jpeg',
+ (SELECT id FROM person WHERE document_number = '101000010' LIMIT 1));
+
+
+INSERT INTO role (name) VALUES
+('ADMIN'),
+('MANAGER'),
+('EMPLOYEE'),
+('CLIENT'),
+('CASHIER'),
+('SUPERVISOR'),
+('SELLER'),
+('INVENTORY_MANAGER'),
+('SUPPORT'),
+('GUEST');
+
+INSERT INTO module (name) VALUES
+('SECURITY'),
+('USERS'),
+('ROLES'),
+('INVENTORY'),
+('PRODUCTS'),
+('SALES'),
+('ORDERS'),
+('CUSTOMERS'),
+('PAYMENTS'),
+('REPORTS');
+
+
+INSERT INTO view (module_id, name, description)
+VALUES
+((SELECT id_module FROM module WHERE name='INVENTORY' LIMIT 1),
+ 'Crear producto',
+ 'Pantalla para registrar nuevos productos en inventario'),
+
+((SELECT id_module FROM module WHERE name='INVENTORY' LIMIT 1),
+ 'Editar producto',
+ 'Pantalla para actualizar informacion del producto'),
+
+((SELECT id_module FROM module WHERE name='INVENTORY' LIMIT 1),
+ 'Ver inventario',
+ 'Listado general de productos en inventario'),
+
+((SELECT id_module FROM module WHERE name='SALES' LIMIT 1),
+ 'Crear pedido',
+ 'Formulario para crear pedidos de clientes'),
+
+((SELECT id_module FROM module WHERE name='SALES' LIMIT 1),
+ 'Historial de pedidos',
+ 'Consulta del historial de ventas realizadas'),
+
+((SELECT id_module FROM module WHERE name='CUSTOMERS' LIMIT 1),
+ 'Registrar cliente',
+ 'Formulario para registrar nuevos clientes'),
+
+((SELECT id_module FROM module WHERE name='CUSTOMERS' LIMIT 1),
+ 'Editar cliente',
+ 'Pantalla para modificar informacion de clientes'),
+
+((SELECT id_module FROM module WHERE name='PAYMENTS' LIMIT 1),
+ 'Realizar pago',
+ 'Pantalla para procesar pagos en linea'),
+
+((SELECT id_module FROM module WHERE name='REPORTS' LIMIT 1),
+ 'Reporte de ventas',
+ 'Reporte general de ventas por periodo'),
+
+((SELECT id_module FROM module WHERE name='SECURITY' LIMIT 1),
+ 'Gestion de usuarios',
+ 'Administracion de usuarios del sistema');
+
+
+
+INSERT INTO users (person_id, username, password)
+VALUES
+((SELECT id FROM person WHERE document_number='101000001' LIMIT 1),'juanp','123456'),
+((SELECT id FROM person WHERE document_number='101000002' LIMIT 1),'mariag','123456'),
+((SELECT id FROM person WHERE document_number='101000003' LIMIT 1),'carlosl','123456'),
+((SELECT id FROM person WHERE document_number='101000004' LIMIT 1),'lauram','123456'),
+((SELECT id FROM person WHERE document_number='101000005' LIMIT 1),'andrest','123456'),
+((SELECT id FROM person WHERE document_number='101000006' LIMIT 1),'sofiar','123456'),
+((SELECT id FROM person WHERE document_number='101000007' LIMIT 1),'danielv','123456'),
+((SELECT id FROM person WHERE document_number='101000008' LIMIT 1),'valentinar','123456'),
+((SELECT id FROM person WHERE document_number='101000009' LIMIT 1),'miguelh','123456'),
+((SELECT id FROM person WHERE document_number='101000010' LIMIT 1),'camilao','123456');
+
+
+INSERT INTO user_role (user_id, role_id)
+VALUES
+((SELECT id_user FROM users WHERE username='juanp' LIMIT 1),
+ (SELECT id_role FROM role WHERE name='ADMIN' LIMIT 1)),
+
+((SELECT id_user FROM users WHERE username='mariag' LIMIT 1),
+ (SELECT id_role FROM role WHERE name='MANAGER' LIMIT 1)),
+
+((SELECT id_user FROM users WHERE username='carlosl' LIMIT 1),
+ (SELECT id_role FROM role WHERE name='EMPLOYEE' LIMIT 1)),
+
+((SELECT id_user FROM users WHERE username='lauram' LIMIT 1),
+ (SELECT id_role FROM role WHERE name='CLIENT' LIMIT 1)),
+
+((SELECT id_user FROM users WHERE username='andrest' LIMIT 1),
+ (SELECT id_role FROM role WHERE name='CASHIER' LIMIT 1)),
+
+((SELECT id_user FROM users WHERE username='sofiar' LIMIT 1),
+ (SELECT id_role FROM role WHERE name='SUPERVISOR' LIMIT 1)),
+
+((SELECT id_user FROM users WHERE username='danielv' LIMIT 1),
+ (SELECT id_role FROM role WHERE name='SELLER' LIMIT 1)),
+
+((SELECT id_user FROM users WHERE username='valentinar' LIMIT 1),
+ (SELECT id_role FROM role WHERE name='INVENTORY_MANAGER' LIMIT 1)),
+
+((SELECT id_user FROM users WHERE username='miguelh' LIMIT 1),
+ (SELECT id_role FROM role WHERE name='SUPPORT' LIMIT 1)),
+
+((SELECT id_user FROM users WHERE username='camilao' LIMIT 1),
+ (SELECT id_role FROM role WHERE name='GUEST' LIMIT 1));
+
+
+
+
+INSERT INTO role_module (role_id, module_id)
+VALUES
+((SELECT id_role FROM role WHERE name='ADMIN' LIMIT 1),
+ (SELECT id_module FROM module WHERE name='SECURITY' LIMIT 1)),
+
+((SELECT id_role FROM role WHERE name='ADMIN' LIMIT 1),
+ (SELECT id_module FROM module WHERE name='INVENTORY' LIMIT 1)),
+
+((SELECT id_role FROM role WHERE name='ADMIN' LIMIT 1),
+ (SELECT id_module FROM module WHERE name='REPORTS' LIMIT 1)),
+
+((SELECT id_role FROM role WHERE name='MANAGER' LIMIT 1),
+ (SELECT id_module FROM module WHERE name='INVENTORY' LIMIT 1)),
+
+((SELECT id_role FROM role WHERE name='MANAGER' LIMIT 1),
+ (SELECT id_module FROM module WHERE name='SALES' LIMIT 1)),
+
+((SELECT id_role FROM role WHERE name='EMPLOYEE' LIMIT 1),
+ (SELECT id_module FROM module WHERE name='SALES' LIMIT 1)),
+
+((SELECT id_role FROM role WHERE name='EMPLOYEE' LIMIT 1),
+ (SELECT id_module FROM module WHERE name='PRODUCTS' LIMIT 1)),
+
+((SELECT id_role FROM role WHERE name='CLIENT' LIMIT 1),
+ (SELECT id_module FROM module WHERE name='ORDERS' LIMIT 1)),
+
+((SELECT id_role FROM role WHERE name='CLIENT' LIMIT 1),
+ (SELECT id_module FROM module WHERE name='PAYMENTS' LIMIT 1)),
+
+((SELECT id_role FROM role WHERE name='SUPERVISOR' LIMIT 1),
+ (SELECT id_module FROM module WHERE name='REPORTS' LIMIT 1));
+
+
+
+
+INSERT INTO module_view (module_id, view_id)
+VALUES
+((SELECT id_module FROM module WHERE name='INVENTORY' LIMIT 1),
+ (SELECT id_view FROM view WHERE name='Crear producto' LIMIT 1)),
+
+((SELECT id_module FROM module WHERE name='INVENTORY' LIMIT 1),
+ (SELECT id_view FROM view WHERE name='Editar producto' LIMIT 1)),
+
+((SELECT id_module FROM module WHERE name='INVENTORY' LIMIT 1),
+ (SELECT id_view FROM view WHERE name='Ver inventario' LIMIT 1)),
+
+((SELECT id_module FROM module WHERE name='SALES' LIMIT 1),
+ (SELECT id_view FROM view WHERE name='Crear pedido' LIMIT 1)),
+
+((SELECT id_module FROM module WHERE name='SALES' LIMIT 1),
+ (SELECT id_view FROM view WHERE name='Historial de pedidos' LIMIT 1)),
+
+((SELECT id_module FROM module WHERE name='CUSTOMERS' LIMIT 1),
+ (SELECT id_view FROM view WHERE name='Registrar cliente' LIMIT 1)),
+
+((SELECT id_module FROM module WHERE name='CUSTOMERS' LIMIT 1),
+ (SELECT id_view FROM view WHERE name='Editar cliente' LIMIT 1)),
+
+((SELECT id_module FROM module WHERE name='PAYMENTS' LIMIT 1),
+ (SELECT id_view FROM view WHERE name='Realizar pago' LIMIT 1)),
+
+((SELECT id_module FROM module WHERE name='REPORTS' LIMIT 1),
+ (SELECT id_view FROM view WHERE name='Reporte de ventas' LIMIT 1)),
+
+((SELECT id_module FROM module WHERE name='SECURITY' LIMIT 1),
+ (SELECT id_view FROM view WHERE name='Gestion de usuarios' LIMIT 1));
+
+
+
+
+INSERT INTO category (name, description)
+VALUES
+('Bebidas calientes', 'Productos como cafe, chocolate y te'),
+('Bebidas frias', 'Jugos naturales, gaseosas y bebidas frias'),
+('Panaderia', 'Productos de pan, croissants y pan dulce'),
+('Reposteria', 'Tortas, galletas y postres'),
+('Snacks', 'Productos ligeros como papas y paquetes'),
+('Sandwiches', 'Sandwiches y productos de comida rapida'),
+('Desayunos', 'Combos de desayuno'),
+('Almuerzos', 'Platos de almuerzo'),
+('Postres', 'Dulces y productos de postre'),
+('Otros', 'Productos que no pertenecen a otra categoria');
+
+
+
+
+INSERT INTO supplier (name, phone)
+VALUES
+('Distribuidora Cafe Huila', '3101234567'),
+('Bebidas Nacionales', '3112345678'),
+('Panaderia Central', '3123456789'),
+('Lacteos del Sur', '3134567890'),
+('Snacks Colombia', '3145678901'),
+('Frutas y Verduras La Plaza', '3156789012'),
+('Distribuciones Dulce Sabor', '3167890123'),
+('Proveedor Integral SENA', '3178901234'),
+('Productos Alimenticios Andinos', '3189012345'),
+('Mercado Mayorista Neiva', '3190123456');
+
+
+
+
+INSERT INTO product (category_id, supplier_id, name, price)
+VALUES
+((SELECT id_category FROM category WHERE name='Bebidas calientes' LIMIT 1),
+ (SELECT id_supplier FROM supplier WHERE name='Distribuidora Cafe Huila' LIMIT 1),
+ 'Cafe americano', 2500.00),
+
+((SELECT id_category FROM category WHERE name='Bebidas calientes' LIMIT 1),
+ (SELECT id_supplier FROM supplier WHERE name='Distribuciones Dulce Sabor' LIMIT 1),
+ 'Chocolate caliente', 3000.00),
+
+((SELECT id_category FROM category WHERE name='Bebidas frias' LIMIT 1),
+ (SELECT id_supplier FROM supplier WHERE name='Bebidas Nacionales' LIMIT 1),
+ 'Jugo de naranja', 3500.00),
+
+((SELECT id_category FROM category WHERE name='Bebidas frias' LIMIT 1),
+ (SELECT id_supplier FROM supplier WHERE name='Bebidas Nacionales' LIMIT 1),
+ 'Gaseosa personal', 2800.00),
+
+((SELECT id_category FROM category WHERE name='Panaderia' LIMIT 1),
+ (SELECT id_supplier FROM supplier WHERE name='Panaderia Central' LIMIT 1),
+ 'Croissant', 2200.00),
+
+((SELECT id_category FROM category WHERE name='Panaderia' LIMIT 1),
+ (SELECT id_supplier FROM supplier WHERE name='Panaderia Central' LIMIT 1),
+ 'Pan de queso', 2000.00),
+
+((SELECT id_category FROM category WHERE name='Reposteria' LIMIT 1),
+ (SELECT id_supplier FROM supplier WHERE name='Distribuciones Dulce Sabor' LIMIT 1),
+ 'Torta de chocolate', 4500.00),
+
+((SELECT id_category FROM category WHERE name='Snacks' LIMIT 1),
+ (SELECT id_supplier FROM supplier WHERE name='Snacks Colombia' LIMIT 1),
+ 'Papas fritas', 2000.00),
+
+((SELECT id_category FROM category WHERE name='Sandwiches' LIMIT 1),
+ (SELECT id_supplier FROM supplier WHERE name='Proveedor Integral SENA' LIMIT 1),
+ 'Sandwich de jamon y queso', 5000.00),
+
+((SELECT id_category FROM category WHERE name='Postres' LIMIT 1),
+ (SELECT id_supplier FROM supplier WHERE name='Productos Alimenticios Andinos' LIMIT 1),
+ 'Gelatina', 1500.00);
+
+
+
+
+INSERT INTO inventory (product_id, quantity)
+VALUES
+((SELECT id_product FROM product WHERE name='Cafe americano' LIMIT 1), 50),
+
+((SELECT id_product FROM product WHERE name='Chocolate caliente' LIMIT 1), 40),
+
+((SELECT id_product FROM product WHERE name='Jugo de naranja' LIMIT 1), 35),
+
+((SELECT id_product FROM product WHERE name='Gaseosa personal' LIMIT 1), 60),
+
+((SELECT id_product FROM product WHERE name='Croissant' LIMIT 1), 25),
+
+((SELECT id_product FROM product WHERE name='Pan de queso' LIMIT 1), 30),
+
+((SELECT id_product FROM product WHERE name='Torta de chocolate' LIMIT 1), 20),
+
+((SELECT id_product FROM product WHERE name='Papas fritas' LIMIT 1), 45),
+
+((SELECT id_product FROM product WHERE name='Sandwich de jamon y queso' LIMIT 1), 15),
+
+((SELECT id_product FROM product WHERE name='Gelatina' LIMIT 1), 50);
+
+
+
+
+INSERT INTO customer (person_id)
+VALUES
+((SELECT id FROM person WHERE document_number='101000001' LIMIT 1)),
+((SELECT id FROM person WHERE document_number='101000002' LIMIT 1)),
+((SELECT id FROM person WHERE document_number='101000003' LIMIT 1)),
+((SELECT id FROM person WHERE document_number='101000004' LIMIT 1)),
+((SELECT id FROM person WHERE document_number='101000005' LIMIT 1)),
+((SELECT id FROM person WHERE document_number='101000006' LIMIT 1)),
+((SELECT id FROM person WHERE document_number='101000007' LIMIT 1)),
+((SELECT id FROM person WHERE document_number='101000008' LIMIT 1)),
+((SELECT id FROM person WHERE document_number='101000009' LIMIT 1)),
+((SELECT id FROM person WHERE document_number='101000010' LIMIT 1));
+
+
+
+
+INSERT INTO orders (customer_id, total)
+VALUES
+((SELECT c.id_customer
+  FROM customer c
+  JOIN person p ON c.person_id = p.id
+  WHERE p.document_number='101000001' LIMIT 1), 12000.00),
+
+((SELECT c.id_customer
+  FROM customer c
+  JOIN person p ON c.person_id = p.id
+  WHERE p.document_number='101000002' LIMIT 1), 8000.00),
+
+((SELECT c.id_customer
+  FROM customer c
+  JOIN person p ON c.person_id = p.id
+  WHERE p.document_number='101000003' LIMIT 1), 6500.00),
+
+((SELECT c.id_customer
+  FROM customer c
+  JOIN person p ON c.person_id = p.id
+  WHERE p.document_number='101000004' LIMIT 1), 10000.00),
+
+((SELECT c.id_customer
+  FROM customer c
+  JOIN person p ON c.person_id = p.id
+  WHERE p.document_number='101000005' LIMIT 1), 15000.00),
+
+((SELECT c.id_customer
+  FROM customer c
+  JOIN person p ON c.person_id = p.id
+  WHERE p.document_number='101000006' LIMIT 1), 7000.00),
+
+((SELECT c.id_customer
+  FROM customer c
+  JOIN person p ON c.person_id = p.id
+  WHERE p.document_number='101000007' LIMIT 1), 9500.00),
+
+((SELECT c.id_customer
+  FROM customer c
+  JOIN person p ON c.person_id = p.id
+  WHERE p.document_number='101000008' LIMIT 1), 11000.00),
+
+((SELECT c.id_customer
+  FROM customer c
+  JOIN person p ON c.person_id = p.id
+  WHERE p.document_number='101000009' LIMIT 1), 5000.00),
+
+((SELECT c.id_customer
+  FROM customer c
+  JOIN person p ON c.person_id = p.id
+  WHERE p.document_number='101000010' LIMIT 1), 9000.00);
+
+
+
+
+INSERT INTO order_item (order_id, product_id, quantity, price)
+VALUES
+((SELECT id_order FROM orders LIMIT 1),
+ (SELECT id_product FROM product WHERE name='Cafe americano' LIMIT 1),
+ 2, 2500.00),
+
+((SELECT id_order FROM orders LIMIT 1 OFFSET 1),
+ (SELECT id_product FROM product WHERE name='Chocolate caliente' LIMIT 1),
+ 1, 3000.00),
+
+((SELECT id_order FROM orders LIMIT 1 OFFSET 2),
+ (SELECT id_product FROM product WHERE name='Jugo de naranja' LIMIT 1),
+ 2, 3500.00),
+
+((SELECT id_order FROM orders LIMIT 1 OFFSET 3),
+ (SELECT id_product FROM product WHERE name='Gaseosa personal' LIMIT 1),
+ 3, 2800.00),
+
+((SELECT id_order FROM orders LIMIT 1 OFFSET 4),
+ (SELECT id_product FROM product WHERE name='Croissant' LIMIT 1),
+ 2, 2200.00),
+
+((SELECT id_order FROM orders LIMIT 1 OFFSET 5),
+ (SELECT id_product FROM product WHERE name='Pan de queso' LIMIT 1),
+ 2, 2000.00),
+
+((SELECT id_order FROM orders LIMIT 1 OFFSET 6),
+ (SELECT id_product FROM product WHERE name='Torta de chocolate' LIMIT 1),
+ 1, 4500.00),
+
+((SELECT id_order FROM orders LIMIT 1 OFFSET 7),
+ (SELECT id_product FROM product WHERE name='Papas fritas' LIMIT 1),
+ 3, 2000.00),
+
+((SELECT id_order FROM orders LIMIT 1 OFFSET 8),
+ (SELECT id_product FROM product WHERE name='Sandwich de jamon y queso' LIMIT 1),
+ 1, 5000.00),
+
+((SELECT id_order FROM orders LIMIT 1 OFFSET 9),
+ (SELECT id_product FROM product WHERE name='Gelatina' LIMIT 1),
+ 2, 1500.00);
+
+
+
+
+INSERT INTO method_payment (name)
+VALUES
+('Pago en linea'),('Pago en linea'),('Pago en linea'),('Pago en linea'),('Pago en linea'),
+('Efectivo'),('Efectivo'),('Efectivo'),('Efectivo'),('Efectivo');
+
+
+
+
+INSERT INTO invoice (order_id, total)
+VALUES
+((SELECT id_order FROM orders LIMIT 1), 12000.00),
+
+((SELECT id_order FROM orders LIMIT 1 OFFSET 1), 8000.00),
+
+((SELECT id_order FROM orders LIMIT 1 OFFSET 2), 6500.00),
+
+((SELECT id_order FROM orders LIMIT 1 OFFSET 3), 10000.00),
+
+((SELECT id_order FROM orders LIMIT 1 OFFSET 4), 15000.00),
+
+((SELECT id_order FROM orders LIMIT 1 OFFSET 5), 7000.00),
+
+((SELECT id_order FROM orders LIMIT 1 OFFSET 6), 9500.00),
+
+((SELECT id_order FROM orders LIMIT 1 OFFSET 7), 11000.00),
+
+((SELECT id_order FROM orders LIMIT 1 OFFSET 8), 5000.00),
+
+((SELECT id_order FROM orders LIMIT 1 OFFSET 9), 9000.00);
+
+
+
+
+INSERT INTO invoice_item (invoice_id, product_id, quantity, price)
+VALUES
+((SELECT id_invoice FROM invoice LIMIT 1),
+ (SELECT id_product FROM product WHERE name='Cafe americano' LIMIT 1),
+ 2, 2500.00),
+
+((SELECT id_invoice FROM invoice LIMIT 1 OFFSET 1),
+ (SELECT id_product FROM product WHERE name='Chocolate caliente' LIMIT 1),
+ 1, 3000.00),
+
+((SELECT id_invoice FROM invoice LIMIT 1 OFFSET 2),
+ (SELECT id_product FROM product WHERE name='Jugo de naranja' LIMIT 1),
+ 2, 3500.00),
+
+((SELECT id_invoice FROM invoice LIMIT 1 OFFSET 3),
+ (SELECT id_product FROM product WHERE name='Gaseosa personal' LIMIT 1),
+ 3, 2800.00),
+
+((SELECT id_invoice FROM invoice LIMIT 1 OFFSET 4),
+ (SELECT id_product FROM product WHERE name='Croissant' LIMIT 1),
+ 2, 2200.00),
+
+((SELECT id_invoice FROM invoice LIMIT 1 OFFSET 5),
+ (SELECT id_product FROM product WHERE name='Pan de queso' LIMIT 1),
+ 2, 2000.00),
+
+((SELECT id_invoice FROM invoice LIMIT 1 OFFSET 6),
+ (SELECT id_product FROM product WHERE name='Torta de chocolate' LIMIT 1),
+ 1, 4500.00),
+
+((SELECT id_invoice FROM invoice LIMIT 1 OFFSET 7),
+ (SELECT id_product FROM product WHERE name='Papas fritas' LIMIT 1),
+ 3, 2000.00),
+
+((SELECT id_invoice FROM invoice LIMIT 1 OFFSET 8),
+ (SELECT id_product FROM product WHERE name='Sandwich de jamon y queso' LIMIT 1),
+ 1, 5000.00),
+
+((SELECT id_invoice FROM invoice LIMIT 1 OFFSET 9),
+ (SELECT id_product FROM product WHERE name='Gelatina' LIMIT 1),
+ 2, 1500.00);
+
+
+
+
+INSERT INTO payment (invoice_id, method_payment_id, amount)
+VALUES
+((SELECT id_invoice FROM invoice LIMIT 1),
+ (SELECT id_method_payment FROM method_payment WHERE name='Pago en linea' LIMIT 1),
+ 12000.00),
+
+((SELECT id_invoice FROM invoice LIMIT 1 OFFSET 1),
+ (SELECT id_method_payment FROM method_payment WHERE name='Pago en linea' LIMIT 1),
+ 8000.00),
+
+((SELECT id_invoice FROM invoice LIMIT 1 OFFSET 2),
+ (SELECT id_method_payment FROM method_payment WHERE name='Pago en linea' LIMIT 1),
+ 6500.00),
+
+((SELECT id_invoice FROM invoice LIMIT 1 OFFSET 3),
+ (SELECT id_method_payment FROM method_payment WHERE name='Pago en linea' LIMIT 1),
+ 10000.00),
+
+((SELECT id_invoice FROM invoice LIMIT 1 OFFSET 4),
+ (SELECT id_method_payment FROM method_payment WHERE name='Pago en linea' LIMIT 1),
+ 15000.00),
+
+((SELECT id_invoice FROM invoice LIMIT 1 OFFSET 5),
+ (SELECT id_method_payment FROM method_payment WHERE name='Efectivo' LIMIT 1),
+ 7000.00),
+
+((SELECT id_invoice FROM invoice LIMIT 1 OFFSET 6),
+ (SELECT id_method_payment FROM method_payment WHERE name='Efectivo' LIMIT 1),
+ 9500.00),
+
+((SELECT id_invoice FROM invoice LIMIT 1 OFFSET 7),
+ (SELECT id_method_payment FROM method_payment WHERE name='Efectivo' LIMIT 1),
+ 11000.00),
+
+((SELECT id_invoice FROM invoice LIMIT 1 OFFSET 8),
+ (SELECT id_method_payment FROM method_payment WHERE name='Efectivo' LIMIT 1),
+ 5000.00),
+
+((SELECT id_invoice FROM invoice LIMIT 1 OFFSET 9),
+ (SELECT id_method_payment FROM method_payment WHERE name='Efectivo' LIMIT 1),
+ 9000.00);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
