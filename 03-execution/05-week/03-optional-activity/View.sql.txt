@@ -1,0 +1,75 @@
+CREATE VIEW view_orders_customer AS
+SELECT 
+    o.id_order,
+    o.order_date,
+    o.total,
+    c.id_customer
+FROM orders o
+JOIN customer c
+ON o.customer_id = c.id_customer;
+
+SELECT * FROM view_orders_customer;
+
+CREATE VIEW view_product_inventory AS
+SELECT
+    p.id_product,
+    p.name AS product_name,
+    p.price,
+    i.quantity
+FROM product p
+JOIN inventory i
+ON p.id_product = i.product_id;
+
+SELECT * FROM view_product_inventory;
+
+CREATE VIEW view_product_category AS
+SELECT
+    p.id_product,
+    p.name AS product_name,
+    p.price,
+    c.name AS category_name
+FROM product p
+JOIN category c
+ON p.category_id = c.id_category;
+
+SELECT * FROM view_product_category;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Esta vista proporciona un informe de ventas
+// que incluye detalles del pedido, el cliente,
+// el producto, la cantidad, 
+// el precio y el total por producto, 
+// así como el total del pedido.
+
+CREATE VIEW nombre_de_la_vista AS
+SELECT columna1, columna2, columna3
+FROM tabla1
+JOIN tabla2 ON condicion
+WHERE condicion;

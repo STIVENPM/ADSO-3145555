@@ -1,0 +1,34 @@
+CREATE FUNCTION funcion_calcular
+RETURNS tipo_de_dato
+LANGUAGE SQL
+AS $$
+    consulta o codigo
+$$;
+
+
+CREATE FUNCTION total_producto(precio NUMERIC, cantidad INTEGER)
+RETURNS NUMERIC
+LANGUAGE SQL
+AS $$
+    SELECT precio * cantidad;
+$$;
+
+SELECT total_producto(3000, 3);
+
+
+
+
+
+CREATE FUNCTION total_inventario()
+RETURNS INTEGER
+LANGUAGE SQL
+AS $$
+    SELECT SUM(quantity)
+    FROM inventory;
+$$;
+
+SELECT total_inventario();
+
+
+
+
